@@ -71,3 +71,31 @@ namespace MusicCollection
                 }
             }
         }
+        // Пауза перед поверненням у меню
+        static void Pause()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Натисніть будь-яку клавішу для повернення в меню...");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
+
+        // Пункт 1: Довідка про проєкт і сутність
+        static void ShowAbout()
+        {
+            Console.WriteLine("=== ДОВІДКА ПРО ПРОЄКТ ===");
+            Console.WriteLine("Тема: Музична колекція (Варіант №7)");
+            Console.WriteLine("Головна сутність: Трек");
+            Console.WriteLine("Довідник: Жанр (код, назва, чи активний)");
+            Console.WriteLine("Підсумкова величина: загальна тривалість колекції та топ-5 за прослуховуваннями.\n");
+
+            Console.WriteLine("Поля сутності «Трек»:");
+            Console.WriteLine("1. int                     код                    (призначається автоматично)");
+            Console.WriteLine("2. string                  виконавець             (не порожній рядок)");
+            Console.WriteLine("3. string                  назва                  (не порожній рядок)");
+            Console.WriteLine("4. string                  альбом                 (назва альбому/синглу)");
+            Console.WriteLine("5. int                     рік                    (від 1900 до поточного)");
+            Console.WriteLine("6. int                     тривалість             (у секундах, > 0)");
+            Console.WriteLine("7. int                     код жанру              (ідентифікатор з довідника)");
+            Console.WriteLine("8. int                     кількість прослуховувань (ціле невід'ємне число)");
+        }
