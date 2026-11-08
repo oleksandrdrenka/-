@@ -124,3 +124,92 @@ namespace MusicCollection
 
             Console.WriteLine("+----------------------+----------------------+");
         }
+        // Пункт 3: Таблиця з двома входами та підсумками (Рівень А + Рівень Б)
+        static void ShowTwoDimensionalTable()
+        {
+            Console.WriteLine("=== ЗВЕДЕНА ТАБЛИЦЯ ПРОСЛУХОВУВАНЬ (ЗА ДВА ВХОДИ) ===");
+            Console.WriteLine("Моделювання розподілу кількості прослуховувань треків за жанрами та днями тижня.\n");
+
+            Console.Write("Введіть кількість категорій жанрів (рядків, від 1 до 10): ");
+            string rowsInput = Console.ReadLine();
+            bool rowsOk = int.TryParse(rowsInput, out int rowCount);
+
+            Console.Write("Введіть кількість періодів/днів (стовпців, від 1 до 7): ");
+            string colsInput = Console.ReadLine();
+            bool colsOk = int.TryParse(colsInput, out int colCount);
+
+            // Перевірка коректності введення користувача
+            if (!rowsOk || !colsOk || rowCount <= 0 || colCount <= 0 || rowCount > 10 || colCount > 7)
+            {
+                Console.WriteLine("\nПомилка: введено некоректні межі таблиці (мають бути додатні цілі числа у розумних межах).");
+                return;
+            }
+
+            Console.WriteLine();
+
+            // Виведення шапки таблиці
+            Console.Write($"{"Жанр \\ День",-15}");
+            for (int col = 1; col <= colCount; col++)
+            {
+                Console.Write($"{"День " + col,10}");
+            }
+            Console.WriteLine($"{"Підсумок",12}");
+
+            // Розділювальна лінія
+            PrintSeparator(15 + colCount * 10 + 12);
+
+            int grandTotal = 0;
+
+            // Зовнішній цикл — рядки
+            for (int row = 1; row <= rowCount; row++)
+            {
+                int rowSum = 0;
+                Console.Write($"{"Жанр #" + row,-15}");
+
+                // Внутрішній цикл — стовпці
+                for (int col = 1; col <= colCount; col++)
+                {
+                    // Детермінована формула для навчальної імітації значень прослуховувань
+                    int value = (row * 17 + col * 29) % 150 + 20;
+                    rowSum += value;
+                    Console.Write($"{value,10}");
+                }
+
+                // Виведення підсумку рядка
+                Console.WriteLine($"{rowSum,12}");
+                grandTotal += rowSum;
+            }
+
+            // Розділювальна лінія перед підсумковим рядком
+            PrintSeparator(15 + colCount * 10 + 12);
+
+            // Рівень Б: обчислення та виведення підсумків по кожному стовпцю
+            Console.Write($"{"Підсумок дня",-15}");
+
+            for (int col = 1; col <= colCount; col++)
+            {
+                int colSum = 0;
+                // Підсумовуємо всі рядки для поточного стовпця
+                for (int row = 1; row <= rowCount; row++)
+                {
+                    int value = (row * 17 + col * 29) % 150 + 20;
+                    colSum += value;
+                }
+                Console.Write($"{colSum,10}");
+            }
+
+            // Загальний підсумок у правому нижньому кутку
+            Console.WriteLine($"{grandTotal,12}");
+            PrintSeparator(15 + colCount * 10 + 12);
+        }
+
+        static void PrintSeparator(int length)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                Console.Write("-");
+            }
+            Console.WriteLine();
+        }
+    }
+}
