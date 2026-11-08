@@ -99,3 +99,28 @@ namespace MusicCollection
             Console.WriteLine("7. int                     код жанру              (ідентифікатор з довідника)");
             Console.WriteLine("8. int                     кількість прослуховувань (ціле невід'ємне число)");
         }
+        // Пункт 2: Табулювання функції (Рівень А)
+        // Розрахунок орієнтовного розміру нестисненого аудіо (WAV 16-bit 44.1kHz Stereo ≈ 10.09 МБ/хв)
+        static void ShowTabulation()
+        {
+            Console.WriteLine("=== ТАБУЛЮВАННЯ ФУНКЦІЇ ===");
+            Console.WriteLine("Залежність обсягу нестисненого аудіофайлу (WAV, 44.1 кГц / 16 біт) від тривалості треку:\n");
+
+            double fromMinutes = 1.0;
+            double toMinutes = 5.5;
+            double step = 0.5;
+            const double MegabytesPerMinute = 10.094;
+
+            Console.WriteLine("+----------------------+----------------------+");
+            Console.WriteLine("| Тривалість t (хв)    | Орієнтовний обсяг MB |");
+            Console.WriteLine("+----------------------+----------------------+");
+
+            // Використовуємо 1e-9 для запобігання втрати останньої ітерації через неточність double
+            for (double t = fromMinutes; t <= toMinutes + 1e-9; t += step)
+            {
+                double sizeMb = t * MegabytesPerMinute;
+                Console.WriteLine($"| {t,20:F2} | {sizeMb,20:F2} |");
+            }
+
+            Console.WriteLine("+----------------------+----------------------+");
+        }
